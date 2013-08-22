@@ -12,7 +12,6 @@ public class CucumberMemberRepository implements MemberRepository {
 
 	@Override
 	public Collection<Member> getMembers() {
-		// TODO Auto-generated method stub
 		return new ArrayList<Member>();
 	}
 

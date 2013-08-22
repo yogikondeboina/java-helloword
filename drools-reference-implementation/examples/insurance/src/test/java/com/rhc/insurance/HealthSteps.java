@@ -14,6 +14,7 @@ import com.rhc.drools.reference.StatelessDroolsComponent;
 import com.rhc.insurance.test.repositories.CucumberMemberRepository;
 
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -67,8 +68,10 @@ public class HealthSteps {
 	}
 
 	@Then("^PH risk level should be:$")
-	public void do_something() {
-
+	public void PH_risk_level_should_be(DataTable arg1) throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		// For automatic conversion, change DataTable to List<YourType>
+		throw new PendingException();
 	}
 
 }
