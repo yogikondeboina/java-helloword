@@ -10,7 +10,6 @@
   <packaging>pom</packaging>
   
 	<modules>
-		<module>mortgage-application</module>
 		<module>discounts</module>
 		<module>insurance</module>
 	</modules>
