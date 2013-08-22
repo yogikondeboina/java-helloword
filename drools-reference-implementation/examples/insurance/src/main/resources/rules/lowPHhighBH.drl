@@ -31,3 +31,9 @@ rule "lowPHhighBH rule"
 
 end
 
+rule "name 1"
+	when
+	then
+		System.out.println("YAY, I Fired!!!");
+end
+
