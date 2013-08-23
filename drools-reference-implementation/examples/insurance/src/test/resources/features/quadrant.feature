@@ -1,14 +1,14 @@
-Feature: determine health quadrant based on Physical Health & Behavioral Health Score
+Feature: Determine Health Quadrant
 
 Scenario: determine quadrant
 
 Given: Member with:
-| physicalHealth | behavioralHealth |
-|      0.0       |        0.0       |
-|      30.0      |        30.0      |
-|      0.0       |        30.0      |
-|      30.0      |        0.0       |
-|      15.0      |        15.0      |
+| memberID | physicalHealth | behavioralHealth |
+|    0     |      0.0       |        0.0       |
+|    1     |      30.0      |        30.0      |
+|    2     |      0.0       |        30.0      |
+|    3     |      30.0      |        0.0       |
+|    4     |      15.0      |        15.0      |
 
 When determining quadrant
 

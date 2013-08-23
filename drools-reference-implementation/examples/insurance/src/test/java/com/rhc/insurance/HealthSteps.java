@@ -2,6 +2,8 @@ package com.rhc.insurance;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.drools.logger.KnowledgeRuntimeLogger;
@@ -11,7 +13,6 @@ import com.rhc.drools.reference.CommandListBuilder;
 import com.rhc.drools.reference.KnowledgeBaseBuilder;
 import com.rhc.drools.reference.RuleFlowCommandListBuilder;
 import com.rhc.drools.reference.StatelessDroolsComponent;
-import com.rhc.insurance.test.repositories.CucumberMemberRepository;
 
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
@@ -22,7 +23,9 @@ import cucumber.api.java.en.When;
 
 public class HealthSteps {
 
-	private CucumberMemberRepository memberRepository;
+	// private CucumberMemberRepository memberRepository;
+
+	private List<Map<String, String>> memberRepository;
 
 	private StatelessDroolsComponent component;
 
@@ -48,14 +51,23 @@ public class HealthSteps {
 
 	}
 
-	@Before
-	public void init() {
-		memberRepository = new CucumberMemberRepository();
-	}
+	// @Before
+	// public void init() {
+	// memberRepository = new CucumberMemberRepository();
+	//
+	// }
 
 	@Given("^Member with:$")
 	public void Member_with(DataTable members) throws Throwable {
-		memberRepository.createMembers(members.asMaps());
+		// memberRepository.createMembers(members.asMaps());
+		List<Map<String, String>> memberRepository = members.asMaps();
+		someUsers = new HashSet<User>();
+
+		if (users.size() != 0) {
+			for (Map<String, String> member : memberRepository) {
+				someUsers.add(UserStepFactory.fromDataTable(user));
+			}
+		}
 	}
 
 	@When("^determining PH risk level$")
