@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Member {
 
+	public int memberID;
 	// all *Rating variables measured on 0.0-10.0 scale
 	// in all cases, 0.0 is most healthy, 10.0 is least healthy
 	// physical health factors
