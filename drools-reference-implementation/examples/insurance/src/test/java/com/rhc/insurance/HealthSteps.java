@@ -1,11 +1,10 @@
 package com.rhc.insurance;
 
+import com.rhc.insurance.test.repositories.CucumberMemberRepository;
+
 import java.util.Collection;
 import java.util.HashSet;
-<<<<<<< HEAD
-=======
 import java.util.List;
->>>>>>> 27258dc1740a5b467c7076ecad18d71755f9e927
 import java.util.Map;
 import java.util.Set;
 
@@ -26,9 +25,9 @@ import cucumber.api.java.en.When;
 
 public class HealthSteps {
 
-	// private CucumberMemberRepository memberRepository;
+	 private CucumberMemberRepository memberRepository;
 
-	private List<Map<String, String>> memberRepository;
+	//private List<Map<String, String>> memberRepository;
 
 	private StatelessDroolsComponent component;
 
@@ -54,71 +53,20 @@ public class HealthSteps {
 
 	}
 
-	// @Before
-	// public void init() {
-	// memberRepository = new CucumberMemberRepository();
-	//
-	// }
+	@Before
+	public void init()
+	{
+		memberRepository = new CucumberMemberRepository();
+	}
 
 	@Given("^Member with:$")
-	public void Member_with(DataTable members) throws Throwable {
-<<<<<<< HEAD
+	public void Member_with(DataTable members) throws Throwable
+	{
+		//memberRepository = new CucumberMemberRepository();
+		
+		
 		memberRepository.createMembers(members.asMaps());
-		/*
-		 * 
-		List<Map<String, String>> users = usersTable.asMaps();
-        someUsers = new HashSet<User>();
-
-        if ( users.size() != 0 ) {
-            for ( Map<String, String> user : users ) {
-                someUsers.add( UserStepFactory.fromDataTable( user ) ); // UserStepFactory is a helper class for parsing data tables
-            }
-        }
-		 * 
-		 */
-=======
-		// memberRepository.createMembers(members.asMaps());
-		List<Map<String, String>> memberRepository = members.asMaps();
-		someUsers = new HashSet<User>();
-
-		if (users.size() != 0) {
-			for (Map<String, String> member : memberRepository) {
-				someUsers.add(UserStepFactory.fromDataTable(user));
-			}
-		}
->>>>>>> 27258dc1740a5b467c7076ecad18d71755f9e927
 	}
-	
-
-	
-	
-	/*
-	 * @Given( "^these users already exist:$" )
-public void _Register_a_new_user_I_have_these_Users( DataTable usersTable ) throws Throwable {
-        List<Map<String, String>> users = usersTable.asMaps();
-        someUsers = new HashSet<User>();
-
-        if ( users.size() != 0 ) {
-            for ( Map<String, String> user : users ) {
-                someUsers.add( UserStepFactory.fromDataTable( user ) ); // UserStepFactory is a helper class for parsing data tables
-            }
-        }
-}
-
-
-This method is an example of how to parse the table
-
-public static User fromDataTable( Map<String, String> row ) {
-        String username = row.get( "username" );
-        String password = row.get( "password" );
-        String uid = row.get( "uuid" );
-
-        User user = new User( username, password );
-
-        return user;
-}
-	 * 
-	 */
 
 	@When("^determining PH risk level$")
 	public void determining_PH_risk_level() throws Throwable {
