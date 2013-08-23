@@ -1,0 +1,26 @@
+//created on: Aug 14, 2013
+package com.rhc.insurance.rules
+
+import com.rhc.insurance.Member;
+import com.rhc.insurance.Policy;
+
+dialect "mvel";
+
+
+rule "Quadrant 1"
+
+    when
+        //conditions
+	$member : Member
+        (
+        	physicalHealth < 15,
+        	behavioralHealth < 15
+		)
+        
+    then
+        //actions
+        $member.quadrant = 1;
+        System.out.println("fired rule " + kcontext.getRule().getName());
+    
+
+end

@@ -51,7 +51,7 @@ public class CucumberMemberRepository implements MemberRepository
 	public void createMembers(List<Map<String, String>> maps)
 	{
 		members = new HashSet<Member>();
-		
+		System.out.println("members was null : "+(members==null));
 		if ( maps.size() != 0 )
 		{
 			 for ( Map<String, String> map : maps )
@@ -121,6 +121,14 @@ public class CucumberMemberRepository implements MemberRepository
 			BigDecimal behavioralHealth = new BigDecimal(row.get("behavioralHealth"));
 			member.setBehavioralHealth(behavioralHealth);
 		}
+		
+		// quadrant
+				if (row.get("quadrant") != null)
+				{
+				//	int quadrant = new BigDecimal(row.get("physicalHealth"));
+					member.setMemberID(Integer.valueOf(row.get("quadrant")));
+					//member.setPhysicalHealth(physicalHealth);
+				}
 		
 		
         

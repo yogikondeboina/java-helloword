@@ -18,6 +18,25 @@ public class Member {
 	public BigDecimal physicalHealth;
 	public BigDecimal behavioralHealth;
 	
+	public Policy policy;
+	public int quadrant;
+	
+	public int getQuadrant() {
+		return quadrant;
+	}
+
+	public void setQuadrant(int quadrant) {
+		this.quadrant = quadrant;
+	}
+
+	public Policy getPolicy() {
+		return policy;
+	}
+
+	public void setPolicy(Policy policy) {
+		this.policy = policy;
+	}
+
 	public int memberID;
 
 	public Member() {
