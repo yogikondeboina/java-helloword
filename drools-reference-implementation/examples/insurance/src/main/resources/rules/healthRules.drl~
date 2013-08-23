@@ -4,36 +4,30 @@ package insurance.pricing
 import com.rhc.insurance.Member;
 import com.rhc.insurance.Policy;
 
-dialect "mvel";
+//dialect "mvel";
 
 
-rule "lowPHhighBH rule"
+rule "healthRules rule"
 
     when
         //conditions
         $member : Member
         (
-        	smokesRegularly == true,
+        	smokesRegularly == false,
         	filesMedicationRegularly == true
-		)
-		
+        )
 		$policy : Policy
 		(
 			price == 0
 		)
         
         
+        
     then
         //actions
-        $policy.price = 800;
+        $policy.price = 300;
         System.out.println("fired rule " + kcontext.getRule().getName());
     
 
-end
-
-rule "name 1"
-	when
-	then
-		System.out.println("YAY, I Fired!!!");
 end
 

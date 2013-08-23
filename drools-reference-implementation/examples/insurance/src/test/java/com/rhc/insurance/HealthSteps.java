@@ -23,9 +23,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static org.junit.Assert.assertEquals;
+
 public class HealthSteps {
 
 	 private CucumberMemberRepository memberRepository;
+	 private CucumberMemberRepository memberRepositoryResults;
 
 	//private List<Map<String, String>> memberRepository;
 
@@ -38,10 +41,8 @@ public class HealthSteps {
 
 		Set<String> resources = new HashSet<String>();
 		// placeholder rules to be replaced by real rules soon
-		resources.add("rules/lowPHlowBH.drl");
-		resources.add("rules/lowPHhighBH.drl");
-		resources.add("rules/highPHlowBH.drl");
-		resources.add("rules/highPHhighBH.drl");
+		resources.add("rules/setPH.drl");
+		resources.add("rules/setBH.drl");
 
 		KnowledgeBaseBuilder kBuilder = new ClasspathKnowledgeBaseBuilder(
 				resources);
@@ -57,20 +58,39 @@ public class HealthSteps {
 	public void init()
 	{
 		memberRepository = new CucumberMemberRepository();
+		memberRepositoryResults = new CucumberMemberRepository();
 	}
 
-	@Given("^Member with:$")
-	public void Member_with(DataTable members) throws Throwable
+	@Given("^Member with PH:$")
+	public void Member_with_PH(DataTable members) throws Throwable
 	{
 		//memberRepository = new CucumberMemberRepository();
 		
 		
 		memberRepository.createMembers(members.asMaps());
 	}
+	
+	@Given("^Member with BH:$")
+	public void Member_with_BH(DataTable members) throws Throwable
+	{
+		//memberRepository = new CucumberMemberRepository();
+
+		memberRepository.createMembers(members.asMaps());
+	}
 
 	@When("^determining PH risk level$")
 	public void determining_PH_risk_level() throws Throwable {
+		determine_risk_level();
+	}
+	
+	@When("^determining BH risk level$")
+	public void determining_BH_risk_level() throws Throwable {
+		determine_risk_level();
+	}
+	
+	public void determine_risk_level() throws Throwable {
 		Collection<Member> members = memberRepository.getMembers();
+		//memberRepository.print();
 		MemberRequest request = new MemberRequest();
 		request.addFacts(members);
 		System.out.println(component);
@@ -81,7 +101,80 @@ public class HealthSteps {
 	public void PH_risk_level_should_be(DataTable arg1) throws Throwable {
 		// Express the Regexp above with the code you wish you had
 		// For automatic conversion, change DataTable to List<YourType>
-		throw new PendingException();
+		
+		memberRepository.print();
+		
+		System.out.println("creating PH member result repo");
+		memberRepositoryResults.createMembers(arg1.asMaps());
+		
+		
+		// loop through 
+		for (Member member : memberRepository.getMembers())
+		{
+			int id = member.getMemberID();
+			
+			// determine BH and PH score
+			
+			// find corresponding result member
+			Member memberResult = memberRepositoryResults.getMemberFromID(id);
+			
+			// if their healths are the same
+			if (member.getPhysicalHealth().equals(memberResult.getPhysicalHealth()))
+			{
+				// we succeeded
+				System.out.println("SUCCESS: ph health was equal "+member.getPhysicalHealth());
+			}
+			else
+			{
+				System.out.println("FAILURE: ph health was equal "+member.getPhysicalHealth());
+				
+			}
+			
+			assertEquals(member.getPhysicalHealth(), memberResult.getPhysicalHealth());
+		}
+		
+		//members.print
+		
+		//throw new PendingException();
 	}
-
+	
+	@Then("^BH risk level should be:$")
+	public void BH_risk_level_should_be(DataTable arg1) throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		// For automatic conversion, change DataTable to List<YourType>
+		
+		memberRepository.print();
+		
+		memberRepositoryResults.createMembers(arg1.asMaps());
+		
+		
+		// loop through 
+		for (Member member : memberRepository.getMembers())
+		{
+			int id = member.getMemberID();
+			
+			// determine BH and PH score
+			
+			// find corresponding result member
+			Member memberResult = memberRepositoryResults.getMemberFromID(id);
+			
+			// if their healths are the same
+			if (member.getBehavioralHealth().equals(memberResult.getBehavioralHealth()))
+			{
+				// we succeeded
+				System.out.println("SUCCESS: ph health was equal "+member.getBehavioralHealth());
+			}
+			else
+			{
+				System.out.println("FAILURE: ph health was equal "+member.getBehavioralHealth());
+				
+			}
+			
+			assertEquals(member.getBehavioralHealth(), memberResult.getBehavioralHealth());
+		}
+		
+		//members.print
+		
+		//throw new PendingException();
+	}
 }

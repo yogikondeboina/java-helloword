@@ -29,6 +29,14 @@ public class Member {
 		return asthmaRating;
 	}
 
+	public int getMemberID() {
+		return memberID;
+	}
+
+	public void setMemberID(int memberID) {
+		this.memberID = memberID;
+	}
+
 	public void setAsthmaRating(BigDecimal asthmaRating) {
 		this.asthmaRating = asthmaRating;
 	}
@@ -89,5 +97,9 @@ public class Member {
 		this.behavioralHealth = behavioralHealth;
 	}
 
+	public void print()
+	{
+		System.out.println("member, with id="+memberID+" diabetesRating:"+diabetesRating+"  depressionRating:"+depressionRating);
+	}
 	
 }
