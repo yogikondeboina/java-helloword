@@ -1,88 +1,93 @@
 package com.rhc.insurance;
 
+import java.math.BigDecimal;
+
 public class Member {
 
 	// all *Rating variables measured on 0.0-10.0 scale
 	// in all cases, 0.0 is most healthy, 10.0 is least healthy
 	// physical health factors
-	public float asthmaRating;
-	public float diabetesRating;
-	public float cardiovascularRating;
+	public BigDecimal asthmaRating;
+	public BigDecimal diabetesRating;
+	public BigDecimal cardiovascularRating;
 	// behavioral health factors
-	public float depressionRating;
-	public float anxietyRating;
-	public float eatingDisorderRating;
+	public BigDecimal depressionRating;
+	public BigDecimal anxietyRating;
+	public BigDecimal eatingDisorderRating;
 	// PH and BH values
-	public float physicalHealth;
-	public float behavioralHealth;
+	public BigDecimal physicalHealth;
+	public BigDecimal behavioralHealth;
+	
+	public int memberID;
 
 	public Member() {
-		physicalHealth = 0;
-		behavioralHealth = 0;
+		physicalHealth = new BigDecimal(0);
+		behavioralHealth = new BigDecimal(0);
 	}
 
-	public float getAsthmaRating() {
+	public BigDecimal getAsthmaRating() {
 		return asthmaRating;
 	}
 
-	public void setAsthmaRating(float asthmaRating) {
+	public void setAsthmaRating(BigDecimal asthmaRating) {
 		this.asthmaRating = asthmaRating;
 	}
 
-	public float getDiabetesRating() {
+	public BigDecimal getDiabetesRating() {
 		return diabetesRating;
 	}
 
-	public void setDiabetesRating(float diabetesRating) {
+	public void setDiabetesRating(BigDecimal diabetesRating) {
 		this.diabetesRating = diabetesRating;
 	}
 
-	public float getCardiovascularRating() {
+	public BigDecimal getCardiovascularRating() {
 		return cardiovascularRating;
 	}
 
-	public void setCardiovascularRating(float cardiovascularRating) {
+	public void setCardiovascularRating(BigDecimal cardiovascularRating) {
 		this.cardiovascularRating = cardiovascularRating;
 	}
 
-	public float getDepressionRating() {
+	public BigDecimal getDepressionRating() {
 		return depressionRating;
 	}
 
-	public void setDepressionRating(float depressionRating) {
+	public void setDepressionRating(BigDecimal depressionRating) {
 		this.depressionRating = depressionRating;
 	}
 
-	public float getAnxietyRating() {
+	public BigDecimal getAnxietyRating() {
 		return anxietyRating;
 	}
 
-	public void setAnxietyRating(float anxietyRating) {
+	public void setAnxietyRating(BigDecimal anxietyRating) {
 		this.anxietyRating = anxietyRating;
 	}
 
-	public float getEatingDisorderRating() {
+	public BigDecimal getEatingDisorderRating() {
 		return eatingDisorderRating;
 	}
 
-	public void setEatingDisorderRating(float eatingDisorderRating) {
+	public void setEatingDisorderRating(BigDecimal eatingDisorderRating) {
 		this.eatingDisorderRating = eatingDisorderRating;
 	}
 
-	public float getPhysicalHealth() {
+	public BigDecimal getPhysicalHealth() {
 		return physicalHealth;
 	}
 
-	public void setPhysicalHealth(float physicalHealth) {
+	public void setPhysicalHealth(BigDecimal physicalHealth) {
 		this.physicalHealth = physicalHealth;
 	}
 
-	public float getBehavioralHealth() {
+	public BigDecimal getBehavioralHealth() {
 		return behavioralHealth;
 	}
 
-	public void setBehavioralHealth(float behavioralHealth) {
+	public void setBehavioralHealth(BigDecimal behavioralHealth) {
 		this.behavioralHealth = behavioralHealth;
 	}
 
+	
 }

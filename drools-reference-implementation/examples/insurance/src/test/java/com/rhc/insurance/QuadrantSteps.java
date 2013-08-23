@@ -2,7 +2,6 @@ package com.rhc.insurance;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.drools.logger.KnowledgeRuntimeLogger;
@@ -21,7 +20,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class HealthSteps {
+public class QuadrantSteps {
 
 	private CucumberMemberRepository memberRepository;
 
@@ -57,53 +56,10 @@ public class HealthSteps {
 	@Given("^Member with:$")
 	public void Member_with(DataTable members) throws Throwable {
 		memberRepository.createMembers(members.asMaps());
-		/*
-		 * 
-		List<Map<String, String>> users = usersTable.asMaps();
-        someUsers = new HashSet<User>();
-
-        if ( users.size() != 0 ) {
-            for ( Map<String, String> user : users ) {
-                someUsers.add( UserStepFactory.fromDataTable( user ) ); // UserStepFactory is a helper class for parsing data tables
-            }
-        }
-		 * 
-		 */
 	}
-	
 
-	
-	
-	/*
-	 * @Given( "^these users already exist:$" )
-public void _Register_a_new_user_I_have_these_Users( DataTable usersTable ) throws Throwable {
-        List<Map<String, String>> users = usersTable.asMaps();
-        someUsers = new HashSet<User>();
-
-        if ( users.size() != 0 ) {
-            for ( Map<String, String> user : users ) {
-                someUsers.add( UserStepFactory.fromDataTable( user ) ); // UserStepFactory is a helper class for parsing data tables
-            }
-        }
-}
-
-
-This method is an example of how to parse the table
-
-public static User fromDataTable( Map<String, String> row ) {
-        String username = row.get( "username" );
-        String password = row.get( "password" );
-        String uid = row.get( "uuid" );
-
-        User user = new User( username, password );
-
-        return user;
-}
-	 * 
-	 */
-
-	@When("^determining PH risk level$")
-	public void determining_PH_risk_level() throws Throwable {
+	@When("^determining quadrant$")
+	public void determining_quadrant() throws Throwable {
 		Collection<Member> members = memberRepository.getMembers();
 		MemberRequest request = new MemberRequest();
 		request.addFacts(members);
@@ -111,8 +67,8 @@ public static User fromDataTable( Map<String, String> row ) {
 		component.execute(request, null);
 	}
 
-	@Then("^PH risk level should be:$")
-	public void PH_risk_level_should_be(DataTable arg1) throws Throwable {
+	@Then("^quadrant should be:$")
+	public void quadrant_should_be(DataTable arg1) throws Throwable {
 		// Express the Regexp above with the code you wish you had
 		// For automatic conversion, change DataTable to List<YourType>
 		throw new PendingException();
