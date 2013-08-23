@@ -4,6 +4,8 @@ package com.rhc.insurance.rules
 import com.rhc.insurance.Member;
 import com.rhc.insurance.Policy;
 
+import java.math.BigDecimal;
+
 //dialect "mvel";
 
 
@@ -13,8 +15,10 @@ rule "Quadrant 3"
         //conditions
 	$member : Member
         (
-        	physicalHealth >= 15,
-        	behavioralHealth < 15
+        	//physicalHealth >= 15,
+        	//behavioralHealth < 15
+		physicalHealth.compareTo(new BigDecimal(15)) > -1,
+		behavioralHealth.compareTo(new BigDecimal(15)) == -1
 	)
         
     then

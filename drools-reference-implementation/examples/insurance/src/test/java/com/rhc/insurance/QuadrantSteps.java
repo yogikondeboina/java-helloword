@@ -84,6 +84,12 @@ public class QuadrantSteps {
 		
 		memberRepositoryResults.createMembers(arg1.asMaps());
 		
+		System.out.println("member table:");
+		memberRepository.print();
+		
+		System.out.println("member results table:");
+		memberRepositoryResults.print();
+		
 		// loop through 
 				for (Member member : memberRepository.getMembers())
 				{

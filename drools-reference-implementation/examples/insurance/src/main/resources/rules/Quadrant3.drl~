@@ -4,6 +4,8 @@ package com.rhc.insurance.rules
 import com.rhc.insurance.Member;
 import com.rhc.insurance.Policy;
 
+import java.math.BigDecimal;
+
 //dialect "mvel";
 
 
@@ -19,7 +21,7 @@ rule "Quadrant 3"
         
     then
         //actions
-        $member.setQuadrant(4);
+        $member.setQuadrant(3);
         System.out.println("fired rule " + kcontext.getRule().getName());
     
 

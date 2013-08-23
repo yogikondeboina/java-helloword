@@ -118,7 +118,7 @@ public class Member {
 
 	public void print()
 	{
-		System.out.println("member, with id="+memberID+" diabetesRating:"+diabetesRating+"  depressionRating:"+depressionRating);
+		System.out.println("member, with id="+memberID+" quadrant: "+quadrant+" diabetesRating:"+diabetesRating+"  depressionRating:"+depressionRating);
 	}
 	
 }

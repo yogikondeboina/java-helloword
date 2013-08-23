@@ -4,6 +4,8 @@ package com.rhc.insurance.rules
 import com.rhc.insurance.Member;
 import com.rhc.insurance.Policy;
 
+import java.math.BigDecimal;
+
 //dialect "mvel";
 
 
@@ -11,17 +13,17 @@ rule "Quadrant 2"
 
     when
         //conditions
-		$member : Member
+	$member : Member
         (
-        	physicalHealth < 15,
-        	behavioralHealth >= 15
-		)
-		
-		$policy : Policy()
+        	//physicalHealth < 15,
+		physicalHealth.compareTo(new BigDecimal(15)) == -1,
+		behavioralHealth.compareTo(new BigDecimal(15)) < 1
+        	//behavioralHealth >= 15
+	)
         
     then
         //actions
-        $policy.quadrant = 2;
+        $member.setQuadrant(2);
         System.out.println("fired rule " + kcontext.getRule().getName());
     
 

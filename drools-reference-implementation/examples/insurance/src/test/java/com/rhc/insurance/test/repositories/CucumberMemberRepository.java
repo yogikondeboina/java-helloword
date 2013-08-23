@@ -126,7 +126,7 @@ public class CucumberMemberRepository implements MemberRepository
 				if (row.get("quadrant") != null)
 				{
 				//	int quadrant = new BigDecimal(row.get("physicalHealth"));
-					member.setMemberID(Integer.valueOf(row.get("quadrant")));
+					member.setQuadrant(Integer.valueOf(row.get("quadrant")));
 					//member.setPhysicalHealth(physicalHealth);
 				}
 		
