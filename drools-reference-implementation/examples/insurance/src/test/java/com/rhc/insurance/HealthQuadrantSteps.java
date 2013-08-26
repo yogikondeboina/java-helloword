@@ -2,6 +2,7 @@ package com.rhc.insurance;
 
 import com.rhc.insurance.test.repositories.CucumberMemberRepository;
 
+import java.io.BufferedReader;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.drools.logger.KnowledgeRuntimeLogger;
 import com.rhc.drools.reference.ClasspathKnowledgeBaseBuilder;
 import com.rhc.drools.reference.CommandListBuilder;
 import com.rhc.drools.reference.KnowledgeBaseBuilder;
+import com.rhc.drools.reference.ReaderKnowledgeBaseBuilder;
 import com.rhc.drools.reference.RuleFlowCommandListBuilder;
 import com.rhc.drools.reference.StatelessDroolsComponent;
 
@@ -44,16 +46,21 @@ public class HealthQuadrantSteps
 	public void setupComponent()
 	{
 
-		Set<String> resources = new HashSet<String>();
+		Set<BufferedReader> resources = new HashSet<BufferedReader>();
 
-		DroolsExcelConverter.run();
+		DroolsExcelConverter dec = new DroolsExcelConverter();
+		
+		
+		resources.add(dec.buildReader("rules/HealthQuadrantRules.xls"));
+		
+		//buildKnowledgeBaseFromBufferedReader(dec.run());
 		
 		// placeholder rules to be replaced by real rules soon
 	//	resources.add("rules/HealthQuadrantRules.xls");
-		resources.add("rules/HealthQuadrantRules.drl");
+		//resources.add("rules/HealthQuadrantRules.drl");
 		//resources.add("rules/setBH.drl");
 
-		KnowledgeBaseBuilder kBuilder = new ClasspathKnowledgeBaseBuilder(
+		KnowledgeBaseBuilder kBuilder = new ReaderKnowledgeBaseBuilder(
 				resources);
 		CommandListBuilder commandListBuilder = new RuleFlowCommandListBuilder();
 
@@ -146,7 +153,7 @@ public class HealthQuadrantSteps
 	{
 	    // Express the Regexp above with the code you wish you had
 	   // throw new PendingException();
-		
+		System.out.println("OUTPUT TEST XLS");
 		memberRepository.print();
 		
 		assertEquals(member.getQuadrant(), quadrantArg);

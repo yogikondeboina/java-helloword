@@ -1,12 +1,19 @@
 package com.rhc.insurance;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collection;
+
+import javax.servlet.*;
 
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
@@ -27,23 +34,39 @@ import org.drools.runtime.StatefulKnowledgeSession;
  */
 public class DroolsExcelConverter {
 	
-	public static void run()
+	public BufferedReader buildReader(String relativeName)
 	{
 		// Create knowledge builder
-		final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		//final KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
 		// Create drl file from excel sheet
 		InputStream is =null;
-		try {
-			is = new FileInputStream("/home/sklenkar/apps/BRMS_DEMO/bmeisele/java-helloword/drools-reference-implementation/examples/insurance/src/main/resources/rules/HealthQuadrantRules.xls");
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		//try
+		//{
+			//ResourceFactory.newClassPathResource( "rules/HealthQuadrantRules.xls", getClass() );
+			//is = new FileInputStream("/home/sklenkar/apps/BRMS_DEMO/bmeisele/java-helloword/drools-reference-implementation/examples/insurance/src/main/resources/rules/HealthQuadrantRules.xls");
+			//String path = this.getClass().getClassLoader().getResourceAsStream("rules/HealthQuadrantRules.xls").toString();
+			//System.out.println(path);
+			//is = new FileInputStream(path);
+			is = this.getClass().getClassLoader().getResourceAsStream(relativeName);
+		//} catch (FileNotFoundException e) {
+		//	e.printStackTrace();
+		//}
 		// Create compiler class instance
 		SpreadsheetCompiler sc = new SpreadsheetCompiler();
 
 		// Compile the excel to generate the (.drl) file
+		String compiledString = sc.compile(is, InputType.XLS);
+		compiledString = compiledString.replace("“","\""); 
+		compiledString = compiledString.replace("”","\"");
+		System.out.println("here is the compiled string: ");
+		System.out.println(compiledString);
+		StringReader sr = new StringReader(compiledString);
+		BufferedReader br = new BufferedReader(sr);
+		return br;
+		/*
+		//return sc.compile(is, InputType.XLS);
+		
 		StringBuffer drl=new StringBuffer(sc.compile(is, InputType.XLS));
 
 		// Insert dialect value into drl file
@@ -55,15 +78,35 @@ public class DroolsExcelConverter {
 
 		// writing string into a drl file
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter("/home/sklenkar/apps/BRMS_DEMO/bmeisele/java-helloword/drools-reference-implementation/examples/insurance/src/main/resources/rules/HealthQuadrantRules.drl"));
-			out.write(drl.toString());
-			out.close();
+			//BufferedWriter out = new BufferedWriter(new FileWriter("/home/sklenkar/apps/BRMS_DEMO/bmeisele/java-helloword/drools-reference-implementation/examples/insurance/src/main/resources/rules/HealthQuadrantRules.drl"));
+			URI basePath;
+			try {
+			//	basePath = this.getClass().getClassLoader().getResource("rules/HealthQuadrantRules.drl").toURI();
+			//	File output = new File(basePath);
+			//	BufferedWriter out = new BufferedWriter(new FileWriter(output));
+				
+				//getServletContext().getRealPath();
+				
+				ServletContext ctx = ServletConfig.getServletContext();
+				String path = ctx.getRealPath("rules/HealthQuadrantRules.drl");
+				//FileWriter fw = new FileWriter(path);
+				BufferedWriter out = new BufferedWriter(new FileWriter(path));
+				
+				out.write(drl.toString());
+				out.close();
+			
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("ERROR: output file could not be created");
+			}
+			
 		}
 		catch (IOException e){
 			System.out.println("Exception ");
 		}
 		// Wait before using the drl file in the next section.
-		/*
+		
 		try {
 			//Thread.sleep(10000);
 		} catch (InterruptedException e) {

@@ -17,7 +17,7 @@
 
 package com.rhc.drools.reference;
 
-
+import java.io.BufferedReader;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,17 +34,17 @@ import org.slf4j.LoggerFactory;
  * 
  * Note the creation of the KnowledgeBase is lazy
  */
-public class ClasspathKnowledgeBaseBuilder implements KnowledgeBaseBuilder {
+public class ReaderKnowledgeBaseBuilder implements KnowledgeBaseBuilder {
 
 	private static Logger logger = LoggerFactory.getLogger( ClasspathKnowledgeBaseBuilder.class );
 	private KnowledgeBase kBase;
-	private Set<String> knowledgeResources;
+	private Set<BufferedReader> knowledgeResources;
 
-	public ClasspathKnowledgeBaseBuilder( Set<String> knowledgeResources ) {
+	public ReaderKnowledgeBaseBuilder( Set<BufferedReader> knowledgeResources ) {
 		this.knowledgeResources = knowledgeResources;
 	}
 
-	public ClasspathKnowledgeBaseBuilder() {
+	public ReaderKnowledgeBaseBuilder() {
 	}
 
 	@Override
@@ -59,18 +59,22 @@ public class ClasspathKnowledgeBaseBuilder implements KnowledgeBaseBuilder {
 	public void setKnowledgeBase( KnowledgeBase kBase ) {
 		this.kBase = kBase;
 	}
-	/*
-	private KnowledgeBase buildKnowledgeBaseFromBufferedReader(BufferedReader br)
+	
+	private KnowledgeBase buildKnowledgeBase()
 	{
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		
+		System.out.println("Starting Reader.buildKnowledgeBase");
 
 		long startTime = System.currentTimeMillis();
 		logger.debug( "Building Knowledge Base..." );
 
-		if ( br != null ) 
-			{
-				kbuilder.add( ResourceFactory.newReaderResource( br), ResourceType.DRL );
+		if ( knowledgeResources != null ) {
+			for ( BufferedReader resourceReader : knowledgeResources ) {
+ 
+				kbuilder.add( ResourceFactory.newReaderResource(resourceReader), ResourceType.DRL );
 			}
+		}
 
 		if ( kbuilder.hasErrors() ) {
 			logger.error( kbuilder.getErrors().toString() );
@@ -82,9 +86,8 @@ public class ClasspathKnowledgeBaseBuilder implements KnowledgeBaseBuilder {
 
 		return kBase;
 	}
-	*/
 
-
+/*
 	private KnowledgeBase buildKnowledgeBase() {
 
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -117,17 +120,17 @@ public class ClasspathKnowledgeBaseBuilder implements KnowledgeBaseBuilder {
 
 		return kBase;
 	}
-
-	public void setKnowledgeResources( Set<String> knowledgeResources ) {
+*/
+	public void setKnowledgeResources( Set<BufferedReader> knowledgeResources ) {
 		this.knowledgeResources = knowledgeResources;
 	}
 
-	public void addKnowledgeResource( String resourceFile ) {
+	public void addKnowledgeResource( BufferedReader resource ) {
 		if ( this.knowledgeResources == null ) {
-			this.knowledgeResources = new HashSet<String>();
+			this.knowledgeResources = new HashSet<BufferedReader>();
 		}
 
-		this.knowledgeResources.add( resourceFile );
+		this.knowledgeResources.add( resource );
 	}
 
 }
