@@ -1,0 +1,30 @@
+package com.rhc.insurance.rules;
+//genedialect "mvel"
+rated from Decision Table
+import com.rhc.insurance.Member;
+// rule values at C18, header at C13
+rule "Asthma Severity_18"
+	salience 65518
+	when
+		Member(asthmaDegree.equals(“severe”))
+	then
+		Member.asthmaRating=2;
+end
+
+// rule values at C19, header at C13
+rule "Asthma Severity_19"
+	salience 65517
+	when
+		Member(asthmaDegree.equals(“mild”))
+	then
+		Member.asthmaRating=1;
+end
+
+// rule values at C20, header at C13
+rule "Asthma Severity_20"
+	salience 65516
+	when
+	then
+		Member.asthmaRating=0;
+end
+
