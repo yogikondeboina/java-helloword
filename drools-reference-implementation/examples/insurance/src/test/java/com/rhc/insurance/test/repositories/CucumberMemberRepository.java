@@ -62,6 +62,13 @@ public class CucumberMemberRepository implements MemberRepository
 		}
 	}
 	
+	public void createSingleMember(Member m)
+	{
+		members = new HashSet<Member>();
+		members.add(m);
+		
+	}
+	
 	public static Member fromDataTable( Map<String, String> row )
 	{
 		Member member = new Member();
