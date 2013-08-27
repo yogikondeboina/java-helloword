@@ -39,8 +39,8 @@ public class DroolsExcelConverter {
 
 		// Compile the excel to generate the (.drl) file
 		String compiledString = sc.compile(is, InputType.XLS);
-		compiledString = compiledString.replace("“", "\"");
-		compiledString = compiledString.replace("”", "\"");
+		// compiledString = compiledString.replace("“", "\"");
+		// compiledString = compiledString.replace("”", "\"");
 		compiledString = compiledString.replace("Member.", "$member.");
 		compiledString = compiledString.replace("Member", "$member : Member");
 		compiledString = compiledString.replace(
