@@ -1,7 +1,5 @@
 package com.rhc.insurance;
 
-import java.math.BigDecimal;
-import java.util.Map;
 import java.util.HashMap;
 
 public class Member {
@@ -9,14 +7,14 @@ public class Member {
 	// all *Rating variables measured on 0.0-10.0 scale
 	// in all cases, 0.0 is most healthy, 10.0 is least healthy
 	// physical health factors
-	public BigDecimal asthmaRating;
-	public BigDecimal diabetesRating;
-	public BigDecimal cardiovascularRating;
+	public float asthmaRating;
+	public float diabetesRating;
+	public float cardiovascularRating;
 	// behavioral health factors
-	public BigDecimal depressionRating;
-	public BigDecimal anxietyRating;
-	public BigDecimal eatingDisorderRating;
-	
+	public float depressionRating;
+	public float anxietyRating;
+	public float eatingDisorderRating;
+
 	public String asthmaDegree;
 	public String diabetesDegree;
 	public String cardiovascularDegree;
@@ -24,29 +22,81 @@ public class Member {
 	public String depressionDegree;
 	public String anxietyDegree;
 	public String eatingDisorderDegree;
-	
+
 	HashMap<String, String> conditions;
-	
+
 	// PH and BH values
-	public BigDecimal physicalHealth;
-	public BigDecimal behavioralHealth;
-	
+	public float physicalHealth;
+	public float behavioralHealth;
+
 	public Policy policy;
 	public int quadrant;
-	
 
 	public int memberID;
-	
-	public Member()
-	{
+
+	public Member() {
 		conditions = new HashMap<String, String>();
-		
-		physicalHealth = new BigDecimal(0);
-		behavioralHealth = new BigDecimal(0);
+
+		asthmaDegree = "";
+		diabetesDegree = "";
+		cardiovascularDegree = "";
+
+		depressionDegree = "";
+		anxietyDegree = "";
+		eatingDisorderDegree = "";
+
+		quadrant = 15;
+
+		physicalHealth = 0;
+		behavioralHealth = 0;
 	}
-	
-	public int getQuadrant() {
-		return quadrant;
+
+	public float getAsthmaRating() {
+		return asthmaRating;
+	}
+
+	public void setAsthmaRating(float asthmaRating) {
+		this.asthmaRating = asthmaRating;
+	}
+
+	public float getDiabetesRating() {
+		return diabetesRating;
+	}
+
+	public void setDiabetesRating(float diabetesRating) {
+		this.diabetesRating = diabetesRating;
+	}
+
+	public float getCardiovascularRating() {
+		return cardiovascularRating;
+	}
+
+	public void setCardiovascularRating(float cardiovascularRating) {
+		this.cardiovascularRating = cardiovascularRating;
+	}
+
+	public float getDepressionRating() {
+		return depressionRating;
+	}
+
+	public void setDepressionRating(float depressionRating) {
+		this.depressionRating = depressionRating;
+	}
+
+	public float getAnxietyRating() {
+		return anxietyRating;
+	}
+
+	public void setAnxietyRating(float anxietyRating) {
+		this.anxietyRating = anxietyRating;
+	}
+
+	public float getEatingDisorderRating() {
+		return eatingDisorderRating;
+	}
+
+	public void setEatingDisorderRating(float eatingDisorderRating) {
+		this.eatingDisorderRating = eatingDisorderRating;
 	}
 
 	public String getAsthmaDegree() {
@@ -97,8 +147,28 @@ public class Member {
 		this.eatingDisorderDegree = eatingDisorderDegree;
 	}
 
-	public void setQuadrant(int quadrant) {
-		this.quadrant = quadrant;
+	public HashMap<String, String> getConditions() {
+		return conditions;
+	}
+
+	public void setConditions(HashMap<String, String> conditions) {
+		this.conditions = conditions;
+	}
+
+	public float getPhysicalHealth() {
+		return physicalHealth;
+	}
+
+	public void setPhysicalHealth(float physicalHealth) {
+		this.physicalHealth = physicalHealth;
+	}
+
+	public float getBehavioralHealth() {
+		return behavioralHealth;
+	}
+
+	public void setBehavioralHealth(float behavioralHealth) {
+		this.behavioralHealth = behavioralHealth;
 	}
 
 	public Policy getPolicy() {
@@ -109,8 +179,12 @@ public class Member {
 		this.policy = policy;
 	}
 
-	public BigDecimal getAsthmaRating() {
-		return asthmaRating;
+	public int getQuadrant() {
+		return quadrant;
+	}
+
+	public void setQuadrant(int quadrant) {
+		this.quadrant = quadrant;
 	}
 
 	public int getMemberID() {
@@ -121,69 +195,11 @@ public class Member {
 		this.memberID = memberID;
 	}
 
-	public void setAsthmaRating(BigDecimal asthmaRating) {
-		this.asthmaRating = asthmaRating;
+	public void print() {
+		System.out.println("member, with id=" + memberID + " quadrant: "
+				+ quadrant + " getquadrant " + getQuadrant()
+				+ " physicalHealth:" + physicalHealth + "  behavioralHealth:"
+				+ behavioralHealth);
 	}
 
-	public BigDecimal getDiabetesRating() {
-		return diabetesRating;
-	}
-
-	public void setDiabetesRating(BigDecimal diabetesRating) {
-		this.diabetesRating = diabetesRating;
-	}
-
-	public BigDecimal getCardiovascularRating() {
-		return cardiovascularRating;
-	}
-
-	public void setCardiovascularRating(BigDecimal cardiovascularRating) {
-		this.cardiovascularRating = cardiovascularRating;
-	}
-
-	public BigDecimal getDepressionRating() {
-		return depressionRating;
-	}
-
-	public void setDepressionRating(BigDecimal depressionRating) {
-		this.depressionRating = depressionRating;
-	}
-
-	public BigDecimal getAnxietyRating() {
-		return anxietyRating;
-	}
-
-	public void setAnxietyRating(BigDecimal anxietyRating) {
-		this.anxietyRating = anxietyRating;
-	}
-
-	public BigDecimal getEatingDisorderRating() {
-		return eatingDisorderRating;
-	}
-
-	public void setEatingDisorderRating(BigDecimal eatingDisorderRating) {
-		this.eatingDisorderRating = eatingDisorderRating;
-	}
-
-	public BigDecimal getPhysicalHealth() {
-		return physicalHealth;
-	}
-
-	public void setPhysicalHealth(BigDecimal physicalHealth) {
-		this.physicalHealth = physicalHealth;
-	}
-
-	public BigDecimal getBehavioralHealth() {
-		return behavioralHealth;
-	}
-
-	public void setBehavioralHealth(BigDecimal behavioralHealth) {
-		this.behavioralHealth = behavioralHealth;
-	}
-
-	public void print()
-	{
-		System.out.println("member, with id="+memberID+" quadrant: "+quadrant+" diabetesRating:"+diabetesRating+"  depressionRating:"+depressionRating);
-	}
-	
 }
