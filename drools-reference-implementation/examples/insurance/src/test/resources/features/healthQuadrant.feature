@@ -21,15 +21,15 @@ Scenario: Quadrant 2
 
 Given a member Jess
 
-And Jane has condition "depression" of degree "severe"
+And Jess has condition "depression" of degree "severe"
 
-And Jane has condition "eatingDisorder" of degree "severe"
+And Jess has condition "eatingDisorder" of degree "severe"
 
-When determining the health quadrant for Jane
+When determining the health quadrant for Jess
 
-Then Jane should be placed in Quadrant 2
+Then Jess should be placed in Quadrant 2
 
-And Jane is assigned a behavioral health case manager
+And Jess is assigned a behavioral health case manager
 
 
 @Quadrant3
