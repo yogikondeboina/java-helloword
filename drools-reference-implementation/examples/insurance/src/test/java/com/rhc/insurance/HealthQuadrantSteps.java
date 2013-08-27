@@ -16,6 +16,7 @@ import com.rhc.drools.reference.RuleFlowCommandListBuilder;
 import com.rhc.drools.reference.StatelessDroolsComponent;
 import com.rhc.insurance.test.repositories.CucumberMemberRepository;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -102,6 +103,21 @@ public class HealthQuadrantSteps {
 
 			member.setAsthmaDegree(degreeArg);
 			break;
+
+		case diabetes:
+
+			member.setDiabetesDegree(degreeArg);
+			break;
+
+		case eatingDisorder:
+
+			member.setEatingDisorderDegree(degreeArg);
+			break;
+
+		case cardiovascular:
+
+			member.setCardiovascularDegree(degreeArg);
+			break;
 		}
 
 		// Express the Regexp above with the code you wish you had
@@ -109,7 +125,7 @@ public class HealthQuadrantSteps {
 	}
 
 	public enum CONDITIONS {
-		asthma, depression, anxiety
+		asthma, depression, anxiety, diabetes, eatingDisorder, cardiovascular
 	}
 
 	/*
@@ -153,12 +169,24 @@ public class HealthQuadrantSteps {
 		assertEquals(quadrantArg, member.getQuadrant());
 	}
 
-	@Then("^a call should be scheduled for (\\d+) days later$")
-	public void a_call_should_be_scheduled_for_days_later(int arg1)
+	@Then("^Joe receives standard care$")
+	public void Joe_receives_standard_care() throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
+	}
+
+	@Then("^Joe is assigned a behavioral health case manager$")
+	public void Joe_is_assigned_a_behavioral_health_case_manager()
 			throws Throwable {
 		// Express the Regexp above with the code you wish you had
-		// throw new PendingException();
-
-		// true
+		throw new PendingException();
 	}
+
+	@Then("^Joe is assigned a specialty disease care manager$")
+	public void Joe_is_assigned_a_specialty_disease_care_manager()
+			throws Throwable {
+		// Express the Regexp above with the code you wish you had
+		throw new PendingException();
+	}
+
 }

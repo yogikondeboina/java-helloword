@@ -55,7 +55,7 @@ And Joe is assigned a specialty disease care manager
 @Quadrant4
 Scenario: Quadrant 4
 
-Given a member Jack
+Given a member Joe
 
 And Joe has condition "asthma" of degree "severe"
 
